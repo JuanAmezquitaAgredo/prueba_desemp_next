@@ -2,13 +2,14 @@
 import { useSession } from "next-auth/react";
 import Navbar from "@/components/Navbar/Navbar";
 import { useTranslations } from "next-intl";
+import ProductsList from "@/components/ProductsList/ProductsList";
 
 export default function HomePage() {
 
   const { status, data: session } = useSession();
   const traduction = useTranslations("homeView");
 
-  console.log(session);
+  const nameProfile = session?.user.email;
 
   return (
     <div>
@@ -17,8 +18,9 @@ export default function HomePage() {
           <Navbar
             programName={traduction("programName")}
             viewTitle={traduction("viewTitle")}
-            username="JohnDoe"
+            username={nameProfile}
           />
+          <ProductsList />
         </div>
       )}
     </div>

@@ -6,6 +6,7 @@ import ProviderSession from "./providerSession";
 import React from "react";
 import "./globals.css";
 import StyledComponentsRegistry from "./src/app/StyledComponentsRegistry";
+import { ProviderRedux } from "./providerRedux";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,13 +34,15 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <StyledComponentsRegistry>
-          <NextIntlClientProvider messages={messages}>
-            <ProviderSession>
-              {children}
-            </ProviderSession>
-          </NextIntlClientProvider>
-        </StyledComponentsRegistry>
+        <ProviderRedux>
+          <StyledComponentsRegistry>
+            <NextIntlClientProvider messages={messages}>
+              <ProviderSession>
+                {children}
+              </ProviderSession>
+            </NextIntlClientProvider>
+          </StyledComponentsRegistry>
+        </ProviderRedux>
       </body>
     </html>
   );

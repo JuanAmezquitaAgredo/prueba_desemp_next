@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl';
 type NavbarProps = {
     programName: string;
     viewTitle: string;
-    username: string;
+    username: string | undefined;
 };
 
 const Navbar: React.FC<NavbarProps> = ({ programName, viewTitle, username }) => {
