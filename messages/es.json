@@ -27,7 +27,7 @@
     "homeView": {
         "programName": "Tienda",
         "viewTitle": "Bienvenido!!",
-        "singout": "Singout",
+        "singout": "Salir",
         "products": "Productos",
         "description": "Descripción"
     }
