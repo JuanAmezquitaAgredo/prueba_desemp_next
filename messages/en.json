@@ -29,7 +29,8 @@
         "programName": "Store",
         "viewTitle": "Welcome!!",
         "singout": "Singout",
-        "products": "Productos"
+        "products": "Productos",
+        "description": "Description"
     }
 
 }

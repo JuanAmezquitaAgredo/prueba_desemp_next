@@ -4,12 +4,21 @@ import { fetchProducts } from '@/redux/productsSlice';
 import { AppDispatch, RootState } from '@/redux/store';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './style.module.css';
 import Swal from 'sweetalert2';
+import { useTranslations } from 'next-intl';
+
+interface ProductDetails {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  image: string;
+}
 
 export default function ProductsList() {
+  const traduction = useTranslations("homeView");
   const { data: session } = useSession();
   const BearerToken: string | undefined = session?.user.tokenJWT;
   const dispatch: AppDispatch = useDispatch();
@@ -17,6 +26,8 @@ export default function ProductsList() {
   const status = useSelector((state: RootState) => state.products.status);
 
   const [likedProducts, setLikedProducts] = useState<number[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<ProductDetails | null>(null); // Estado para el producto seleccionado
+  const [isPopupOpen, setIsPopupOpen] = useState(false); // Estado para controlar el popup
 
   useEffect(() => {
     if (status === 'idle') {
@@ -80,6 +91,16 @@ export default function ProductsList() {
     }
   };
 
+  const openPopup = (product: ProductDetails) => {
+    setSelectedProduct(product);
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+    setSelectedProduct(null);
+  };
+
   if (status === 'loading') {
     return <div>Loading...</div>;
   }
@@ -92,7 +113,11 @@ export default function ProductsList() {
     <div className={styles.container}>
       <div className={styles.productsGrid}>
         {products.map((product: any) => (
-          <div key={product.id} className={styles.card}>
+          <div 
+            key={product.id} 
+            className={styles.card} 
+            onClick={() => openPopup(product)} // Abrir popup al hacer clic en el producto
+          >
             <img src={product.image} alt={product.title} className={styles.image} />
             <h2 className={styles.productTitle}>{product.title}</h2>
             <p className={styles.price}>${product.price}</p>
@@ -100,13 +125,19 @@ export default function ProductsList() {
             <div className={styles.buttonsOptions}>
               <button
                 className={`${styles.likeButton} ${likedProducts.includes(product.id) ? styles.liked : ''}`}
-                onClick={() => toggleLike(product.id)}
+                onClick={(e) => {
+                  e.stopPropagation(); // Evitar que el clic en el botón de like abra el popup
+                  toggleLike(product.id);
+                }}
               >
                 {likedProducts.includes(product.id) ? '❤️ Liked' : '♡ Like'}
               </button>
               <button 
                 className={styles.addProduct} 
-                onClick={() => addProduct(product.id)} 
+                onClick={(e) => {
+                  e.stopPropagation(); // Evitar que el clic en el botón de agregar abra el popup
+                  addProduct(product.id);
+                }} 
               >
                 +
               </button>
@@ -114,6 +145,21 @@ export default function ProductsList() {
           </div>
         ))}
       </div>
+
+      {/* Popup de detalles del producto */}
+      {isPopupOpen && selectedProduct && (
+        <div className={styles.popup}>
+          <div className={styles.popupContent}>
+            <span className={styles.close} onClick={closePopup}>&times;</span>
+            <img src={selectedProduct.image} alt={selectedProduct.title} className={styles.popupImage} />
+            <h2>{selectedProduct.title}</h2>
+            <h3>{traduction("description")}</h3>
+            <p>{selectedProduct.description}</p>
+            <p>Price: ${selectedProduct.price}</p>
+            <button className={styles.addProduct} onClick={() => addProduct(selectedProduct.id)}>Agregar al carrito</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
