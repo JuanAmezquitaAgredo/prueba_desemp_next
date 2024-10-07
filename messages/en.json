@@ -22,5 +22,11 @@
         "success_message": "The user {username} has been registered successfully.",
         "error_register": "Oops...",
         "error_message": "There was an error registering the user. Please try again."
+    },
+    "homeView": {
+        "programName": "Store",
+        "viewTitle": "Welcome!!",
+        "singout": "Singout"
     }
+
 }

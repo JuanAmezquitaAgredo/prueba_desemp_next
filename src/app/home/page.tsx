@@ -1,26 +1,24 @@
 'use client'
-import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import Navbar from "@/components/Navbar/Navbar";
+import { useTranslations } from "next-intl";
 
 export default function HomePage() {
-  
-  const router = useRouter();
-  const { status, data: session } = useSession();
 
-  const handleSignOut = async () => {
-    await signOut({ redirect: false });
-    router.replace("/");
-  };
+  const { status, data: session } = useSession();
+  const traduction = useTranslations("homeView");
 
   console.log(session);
 
   return (
     <div>
-      <h3>Home Page</h3>
       {status === "authenticated" && (
         <div>
-          <p>page</p>
-          <button onClick={handleSignOut}>Signout</button>
+          <Navbar
+            programName={traduction("programName")}
+            viewTitle={traduction("viewTitle")}
+            username="JohnDoe"
+          />
         </div>
       )}
     </div>

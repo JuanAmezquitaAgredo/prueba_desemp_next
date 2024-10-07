@@ -1,0 +1,34 @@
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.programName h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.viewTitle h2 {
+    font-size: 2rem;
+}
+
+.user{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.user p {
+    font-size: 1rem;
+    font-weight: normal;
+}

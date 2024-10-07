@@ -21,5 +21,10 @@
         "success_message": "El usuario {username} se ha registrado correctamente.",
         "error_register": "Oops...",
         "error_message": "Hubo un error al registrar el usuario. Inténtalo de nuevo."
+    },
+    "homeView": {
+        "programName": "Tienda",
+        "viewTitle": "Bienvenido!!",
+        "singout": "Singout"
     }
 }
