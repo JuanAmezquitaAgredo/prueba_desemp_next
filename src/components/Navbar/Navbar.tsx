@@ -5,6 +5,7 @@ import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import SelectLanguage from '../UI/SelectLanguage/SelectLanguage';
 import { useTranslations } from 'next-intl';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 type NavbarProps = {
     programName: string;
@@ -21,6 +22,10 @@ const Navbar: React.FC<NavbarProps> = ({ programName, viewTitle, username }) => 
         router.replace("/");
       };
 
+    const handleCheckout = () => {
+        router.push("/checkout");
+    };
+
     return (
         <nav className={styles.navbar}>
             <div className={styles.container}>
@@ -30,6 +35,7 @@ const Navbar: React.FC<NavbarProps> = ({ programName, viewTitle, username }) => 
                 </div>
                 <div className={styles.viewTitle}>
                     <h2>{viewTitle}</h2>
+                    <button onClick={handleCheckout}><ShoppingCartIcon/></button>
                 </div>
                 <div className={styles.user}>
                     <p>{username}</p>

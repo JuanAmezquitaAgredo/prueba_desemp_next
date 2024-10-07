@@ -18,6 +18,12 @@
     font-weight: bold;
 }
 
+.viewTitle{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .viewTitle h2 {
     font-size: 2rem;
 }

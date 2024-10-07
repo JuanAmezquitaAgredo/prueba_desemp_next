@@ -1,0 +1,138 @@
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .productsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    height: 400px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .productTitle {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    text-align: center;
+    line-height: 1em; 
+    max-height: 2.8em; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    word-wrap: break-word; 
+  }
+  
+  
+  
+  .price {
+    color: #FF4B2B;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    text-align: center;
+    line-height: 1.2em; 
+    max-height: 3.6em; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    word-wrap: break-word; 
+  }
+  
+  
+  .likeButton {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #e74c3c;
+    transition: color 0.3s;
+    margin-top: auto;
+  }
+  
+  .likeButton:hover {
+    color: #c0392b;
+  }
+  
+  .liked {
+    color: #e74c3c;
+  }
+  .buttonsOptions{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .addProduct{
+    background-color: #236025;
+    color: white;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    margin-top: 10px;
+  }
+
+  .removeProduct{
+    background-color: #ad0d0d;
+    color: white;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    margin-top: 10px;
+  }
+
+  .backhome,.pay{
+    background-color: #00830b;
+    color: white;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    margin-top: 10px;
+  }
+
+  .buttonsop{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+

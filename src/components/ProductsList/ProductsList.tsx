@@ -3,22 +3,82 @@
 import { fetchProducts } from '@/redux/productsSlice';
 import { AppDispatch, RootState } from '@/redux/store';
 import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import styles from './style.module.css';
+import Swal from 'sweetalert2';
 
 export default function ProductsList() {
   const { data: session } = useSession();
-  const BearerToken: string |undefined = session?.user.tokenJWT;
+  const BearerToken: string | undefined = session?.user.tokenJWT;
   const dispatch: AppDispatch = useDispatch();
   const products = useSelector((state: RootState) => state.products.items);
   const status = useSelector((state: RootState) => state.products.status);
 
+  const [likedProducts, setLikedProducts] = useState<number[]>([]);
+
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchProducts(BearerToken)); 
+      dispatch(fetchProducts(BearerToken));
     }
   }, [dispatch, status]);
+
+  const toggleLike = async (productId: number) => {
+    const isLiked = likedProducts.includes(productId);
+  
+    try {
+      const response = await fetch(`http://192.168.88.39:7000/auth/products/${productId}/like`, {
+        method: isLiked ? 'DELETE' : 'POST',
+        headers: {
+          'Authorization': `Bearer ${BearerToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.message);
+  
+        setLikedProducts((prevLikedProducts) =>
+          isLiked
+            ? prevLikedProducts.filter((id) => id !== productId)
+            : [...prevLikedProducts, productId]
+        );
+      } else {
+        console.error('Error al marcar el producto como me gusta');
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
+    }
+  };
+
+  const addProduct = (productId: number) => {
+    const product = products.find(p => p.id === productId);
+    if (product) {
+      const newProduct = {
+        id: product.id,
+        quantity: 1, 
+        price: product.price
+      };
+      const storedProducts = JSON.parse(localStorage.getItem('cart') || '[]');
+      const existingProduct = storedProducts.find((p: any) => p.id === newProduct.id);
+
+      if (existingProduct) {
+        existingProduct.quantity += newProduct.quantity;
+      } else {
+        storedProducts.push(newProduct);
+      }
+      localStorage.setItem('cart', JSON.stringify(storedProducts));
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Producto agregado",
+        showConfirmButton: false,
+        timer: 1000
+      });
+    }
+  };
 
   if (status === 'loading') {
     return <div>Loading...</div>;
@@ -29,13 +89,31 @@ export default function ProductsList() {
   }
 
   return (
-    <div>
-      <h1>Products</h1>
-      <ul>
+    <div className={styles.container}>
+      <div className={styles.productsGrid}>
         {products.map((product: any) => (
-          <li key={product.id}>{product.title}</li>
+          <div key={product.id} className={styles.card}>
+            <img src={product.image} alt={product.title} className={styles.image} />
+            <h2 className={styles.productTitle}>{product.title}</h2>
+            <p className={styles.price}>${product.price}</p>
+            <p className={styles.description}>{product.description}</p>
+            <div className={styles.buttonsOptions}>
+              <button
+                className={`${styles.likeButton} ${likedProducts.includes(product.id) ? styles.liked : ''}`}
+                onClick={() => toggleLike(product.id)}
+              >
+                {likedProducts.includes(product.id) ? '❤️ Liked' : '♡ Like'}
+              </button>
+              <button 
+                className={styles.addProduct} 
+                onClick={() => addProduct(product.id)} 
+              >
+                +
+              </button>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
