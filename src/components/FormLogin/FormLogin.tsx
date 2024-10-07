@@ -10,7 +10,7 @@ import styles from "./styles.module.css";
 export default function FormLogin(): React.ReactElement {
   const router = useRouter();
   const traduction = useTranslations("LoginView");
-  const [email, setUseremail] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState('');
 
@@ -19,7 +19,7 @@ export default function FormLogin(): React.ReactElement {
 
     const res = await signIn('credentials', {
       redirect: false,
-      email,
+      username,
       password
     });
 
@@ -35,11 +35,11 @@ export default function FormLogin(): React.ReactElement {
     <form className={styles.form}>
       <h2>{traduction("title")}</h2>
       <GroupInput
-        label={traduction("email")}
-        type="email"
-        onChange={(e) => setUseremail(e.target.value)}
-        name="email"
-        value={email}
+        label={traduction("username")}
+        type="username"
+        onChange={(e) => setUsername(e.target.value)}
+        name="username"
+        value={username}
       />
       <GroupInput
         label={traduction("password")}

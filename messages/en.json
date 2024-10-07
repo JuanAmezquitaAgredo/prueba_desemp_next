@@ -1,0 +1,8 @@
+{
+    "LoginView":{
+        "title": "Login",
+        "username": "Username",
+        "password": "password",
+        "buttonLogin": "login"
+    }
+}
