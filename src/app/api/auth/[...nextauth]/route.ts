@@ -1,14 +1,13 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { User } from "next-auth"; // Tipo User de NextAuth
+import { User } from "next-auth"; 
 
-// Define un tipo de usuario personalizado que extienda el User de NextAuth
+
 interface CustomUser extends User {
     tokenJWT: string;
     userdata: {};
 }
 
-// Opciones de NextAuth con tipado correcto
 const handler = NextAuth({
     providers: [
         CredentialsProvider({
@@ -25,9 +24,9 @@ const handler = NextAuth({
                 const user = await authenticateUser(credentials.username, credentials.password);
 
                 if (user) {
-                    return user as CustomUser; // Devolver el usuario tipado como CustomUser
+                    return user as CustomUser; 
                 } else {
-                    return null; // Retorna null si la autenticación falla
+                    return null; 
                 }
             }
         }),
@@ -65,7 +64,6 @@ const handler = NextAuth({
 
 export { handler as GET, handler as POST };
 
-// Función de autenticación de usuarios
 async function authenticateUser(username: string, password: string) {
     const response = await fetch(`${process.env.API_URL}/auth/login`, {
         method: 'POST',

@@ -32,11 +32,10 @@ export default function SelectLanguage(): React.ReactElement {
 
     const router = useRouter();
 
-    // Aquí se tipa correctamente el evento como MouseEvent
     const HandleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
-        const { value } = e.currentTarget;  // Extraemos el valor del botón
-        Cookies.set("locale", value);       // Guardamos la cookie con el valor del idioma
-        router.refresh();                   // Refrescamos la página
+        const { value } = e.currentTarget;  
+        Cookies.set("locale", value);       
+        router.refresh();                   
     };
 
     return (

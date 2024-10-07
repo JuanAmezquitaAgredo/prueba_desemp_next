@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import styles from './styles.module.css'; // Archivo de estilos para la barra de navegación
+import styles from './styles.module.css'; 
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import SelectLanguage from '../UI/SelectLanguage/SelectLanguage';

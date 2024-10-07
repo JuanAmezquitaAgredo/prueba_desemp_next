@@ -26,8 +26,8 @@ export default function ProductsList() {
   const status = useSelector((state: RootState) => state.products.status);
 
   const [likedProducts, setLikedProducts] = useState<number[]>([]);
-  const [selectedProduct, setSelectedProduct] = useState<ProductDetails | null>(null); // Estado para el producto seleccionado
-  const [isPopupOpen, setIsPopupOpen] = useState(false); // Estado para controlar el popup
+  const [selectedProduct, setSelectedProduct] = useState<ProductDetails | null>(null); 
+  const [isPopupOpen, setIsPopupOpen] = useState(false); 
 
   useEffect(() => {
     if (status === 'idle') {
@@ -116,7 +116,7 @@ export default function ProductsList() {
           <div 
             key={product.id} 
             className={styles.card} 
-            onClick={() => openPopup(product)} // Abrir popup al hacer clic en el producto
+            onClick={() => openPopup(product)} 
           >
             <img src={product.image} alt={product.title} className={styles.image} />
             <h2 className={styles.productTitle}>{product.title}</h2>
@@ -126,7 +126,7 @@ export default function ProductsList() {
               <button
                 className={`${styles.likeButton} ${likedProducts.includes(product.id) ? styles.liked : ''}`}
                 onClick={(e) => {
-                  e.stopPropagation(); // Evitar que el clic en el botón de like abra el popup
+                  e.stopPropagation(); 
                   toggleLike(product.id);
                 }}
               >
@@ -135,7 +135,7 @@ export default function ProductsList() {
               <button 
                 className={styles.addProduct} 
                 onClick={(e) => {
-                  e.stopPropagation(); // Evitar que el clic en el botón de agregar abra el popup
+                  e.stopPropagation(); 
                   addProduct(product.id);
                 }} 
               >
@@ -146,7 +146,6 @@ export default function ProductsList() {
         ))}
       </div>
 
-      {/* Popup de detalles del producto */}
       {isPopupOpen && selectedProduct && (
         <div className={styles.popup}>
           <div className={styles.popupContent}>
