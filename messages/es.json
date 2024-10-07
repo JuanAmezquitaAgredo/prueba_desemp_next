@@ -4,7 +4,9 @@
         "username": "Usuario",
         "password": "Contraseña",
         "buttonLogin": "Logearse",
-        "buttonRegister": "Registrarse"
+        "buttonRegister": "Registrarse",
+        "errorLogin" : "Error al logearse",
+        "Login_Success": "Login Correcto"
     },
     "RegisterView": {
         "title": "Registrarse",

@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import styles from "./styles.module.css";
+import Swal from "sweetalert2";
 
 export default function FormLogin(): React.ReactElement {
   const router = useRouter();
@@ -24,17 +25,26 @@ export default function FormLogin(): React.ReactElement {
     });
 
     if (res?.error) {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: traduction("errorLogin"),
+        showConfirmButton: false,
+        timer: 1500
+      });
       setError(res.error);
     } else {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: traduction("Login_Success"),
+        showConfirmButton: false,
+        timer: 1500
+      });
       router.push("/home");
     }
   };
 
-  const handleRegister = () => {
-    router.replace("/register");
-  };
-
-  
   return (
     <form className={styles.form}>
       <h2>{traduction("title")}</h2>
@@ -52,7 +62,6 @@ export default function FormLogin(): React.ReactElement {
         name="password"
         value={password}
       />
-      {error && <p className={styles.error}>{error}</p>}
       <Button label={traduction("buttonLogin")} onClick={(e) => handleLogin(e)} />
     </form>
   );
