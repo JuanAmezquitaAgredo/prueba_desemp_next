@@ -30,6 +30,10 @@ export default function FormLogin(): React.ReactElement {
     }
   };
 
+  const handleRegister = () => {
+    router.replace("/register");
+  };
+
   
   return (
     <form className={styles.form}>

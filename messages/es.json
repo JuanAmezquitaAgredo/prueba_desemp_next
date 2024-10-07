@@ -1,8 +1,25 @@
 {
-    "LoginView":{
+    "LoginView": {
         "title": "Logearse",
         "username": "Usuario",
         "password": "Contraseña",
-        "buttonLogin": "Logearse"
+        "buttonLogin": "Logearse",
+        "buttonRegister": "Registrarse"
+    },
+    "RegisterView": {
+        "title": "Registrarse",
+        "email": "Correo electrónico",
+        "username": "Usuario",
+        "password": "Contraseña",
+        "name": "Nombre",
+        "phone": "Número",
+        "buttonLogin": "Logearse",
+        "buttonRegister": "Registrarse"
+    },
+    "Alerts": {
+        "success_register": "¡Usuario registrado!",
+        "success_message": "El usuario {username} se ha registrado correctamente.",
+        "error_register": "Oops...",
+        "error_message": "Hubo un error al registrar el usuario. Inténtalo de nuevo."
     }
 }

@@ -26,6 +26,10 @@ const StyledButton = styled.button<{ ghost?: boolean }>`
     &:focus {
         outline: none;
     }
+
+    &:hover {
+        transform: scale(1.05);
+    }
 `;
 
 export default function Button({ label, onClick }: ButtonProps): React.ReactElement {

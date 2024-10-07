@@ -1,8 +1,26 @@
 {
-    "LoginView":{
+    "LoginView": {
         "title": "Login",
         "username": "Username",
-        "password": "password",
-        "buttonLogin": "login"
+        "password": "Password",
+        "buttonLogin": "Login",
+        "buttonRegister": "Register"
+    },
+    "RegisterView": {
+        "title": "Register",
+        "email": "Email",
+        "username": "Username",
+        "password": "Password",
+        "name": "Name",
+        "phone": "Phone Number",
+        "buttonLogin": "Login",
+        "buttonRegister": "Register"
+
+    },
+    "Alerts": {
+        "success_register": "User registered!",
+        "success_message": "The user {username} has been registered successfully.",
+        "error_register": "Oops...",
+        "error_message": "There was an error registering the user. Please try again."
     }
 }
